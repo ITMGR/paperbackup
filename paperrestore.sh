@@ -27,7 +27,7 @@ fi
 # so convert that to \0<number><space>, so sort can sort on that
 # then remove all \n\0<number><space> so we get the originial without newlines added
 
-/usr/bin/zbarimg --raw -Sdisable -Sqrcode.enable "$SCANNEDFILE" \
+/usr/bin/zbarimg --raw -Sdisable -Sqrcode.enable "$@" \
     | sed -e "s/\^/\x0/g" \
     | sort -z -n \
     | sed ':a;N;$!ba;s/\n\x0[0-9]* //g;s/\x0[0-9]* //g;s/\n\x0//g'

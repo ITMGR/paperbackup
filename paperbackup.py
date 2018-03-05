@@ -159,6 +159,11 @@ def prepare_plainlines(ascdata, plaintext_maxlinechars):
 
         chksumlines.append(line)
 
+    # we also want a checksum which the restored file should have
+    b2sum = hashlib.blake2b(bytes(ascdata, 'utf8')).hexdigest()
+    logging.info("b2sum of input ascdata:")
+    logging.info("%s"%b2sum)
+
     # add some documentation around the plaintest
     outlines=[]
     coldoc=" "*splitat
@@ -169,6 +174,10 @@ def prepare_plainlines(ascdata, plaintext_maxlinechars):
     outlines.append(coldoc)
     outlines.extend(chksumlines)
     outlines.append("")
+    outlines.append("")
+    outlines.append("b2sum of input file (split over 2 lines):")
+    outlines.append("%s"%b2sum[:64])
+    outlines.append("%s"%b2sum[64:])
     outlines.append("")
     outlines.append("")
     outlines.append("--")
@@ -328,6 +337,21 @@ if __name__ == "__main__":
         c.showPage()
         # Save the PDF file
         c.save()
+
+        # find the paperbackup-verify script name
+        from shutil import which
+        verify_prog = which("paperbackup-verify.sh")
+        if not verify_prog:
+            verify_prog = which("paperbackup-verify")
+        if not verify_prog:
+            print("\n  !!!!!!!!!")
+            print(''.join(["  ATTENTION:  Could not find 'paperbackup-verify' program which should have been installed together",
+                           " with {}! "]).format(sys.argv[0]))
+            print("  !!!!!!!!!\n")
+        print("\n  !!!!!!!!!")
+        print(''.join(["  ATTENTION:  Running 'paperbackup-verify {}.pdf' NOW is STRONGLY advised to verify that",
+                       " zbarimg can read back the generated qr codes!"]).format(just_filename))
+        print("  !!!!!!!!!\n")
 
     else:
 

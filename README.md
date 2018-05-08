@@ -1,7 +1,8 @@
-#NOTE
+# NOTE
 
 This repository's default branch `reportlab` is a variation of https://github.com/intra2net/paperbackup
 with the possibility of using reportlab as a PDF creation backend added.
+
 Both versions should produce interchangeable output, otherwise please file a bug report against this repository.
 
 # paperbackup.py

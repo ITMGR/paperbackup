@@ -344,14 +344,14 @@ if __name__ == "__main__":
         if not verify_prog:
             verify_prog = which("paperbackup-verify")
         if not verify_prog:
-            print("\n  !!!!!!!!!")
-            print(''.join(["  ATTENTION:  Could not find 'paperbackup-verify' program which should have been installed together",
-                           " with {}! "]).format(sys.argv[0]))
-            print("  !!!!!!!!!\n")
+            verify_prog = which(os.path.join(os.path.dirname(sys.argv[0]), "paperbackup-verify.sh"))
+        if not verify_prog:
+            print("\n  NOTE:  Could not find 'paperbackup-verify' program which should have been")
+            print(  "           installed together with {}! ".format(sys.argv[0]))
+            verify_prog = "paperbackup-verify"
         print("\n  !!!!!!!!!")
-        print(''.join(["  ATTENTION:  Running 'paperbackup-verify {}.pdf' NOW is STRONGLY advised to verify that",
-                       " zbarimg can read back the generated qr codes!"]).format(just_filename))
-        print("  !!!!!!!!!\n")
+        print("  ATTENTION:  Running '{} {}.pdf' NOW is STRONGLY advised to".format(verify_prog, just_filename))
+        print("  !!!!!!!!!     verify that zbarimg can read back the generated qr codes!\n")
 
     else:
 

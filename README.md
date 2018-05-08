@@ -1,3 +1,9 @@
+#NOTE
+
+This repository's default branch `reportlab` is a variation of https://github.com/intra2net/paperbackup
+with the possibility of using reportlab as a PDF creation backend added.
+Both versions should produce interchangeable output, otherwise please file a bug report against this repository.
+
 # paperbackup.py
 
 Create a pdf with barcodes to backup text files on paper.
@@ -10,7 +16,8 @@ Designed to backup ASCII-armored GnuPG and SSH key files and ciphertext.
 ```
 gpg2 --armor --export-options export-minimal --export-secret-key "User Name" >key.asc
 paperbackup.py key.asc
-paperrestore.sh key.asc.pdf | diff key.asc -
+paperbackup-verify.sh key.asc.pdf
+# or: paperrestore.sh key.asc.pdf | diff key.asc -
 lpr key.asc.pdf
 ```
 
@@ -43,7 +50,7 @@ Always needed:
 
 Apart from the above there are now two possible sets of dependencies for paperbackup.py:
 
-#### 1a. using PyX (as with previous versions)
+#### 1a. using PyX (as with the original versions)
 
 - PyX http://pyx.sourceforge.net/
 - LaTeX (required by PyX) https://www.latex-project.org/

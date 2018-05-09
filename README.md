@@ -1,3 +1,8 @@
+# NOTE
+
+For now use either the `reportlab` branch if you want to use reportlab as a PDF backend
+or `upstream-pyx` which aims to track `https://github.com/intra2net/paperbackup`'s master.
+
 # paperbackup.py
 
 Create a pdf with barcodes to backup text files on paper.
